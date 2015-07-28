@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="connection.url">jdbc:mysql://localhost:3306/statistics</property>
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="connection.username">root</property>
+        <property name="connection.password">4Bcd3Fgh1Jkl</property>
+
+        <mapping resource="DivisionTeamsEntity.hbm.xml"/>
+        <mapping class="io.github.hylinn.hibernate.statistics.DivisionTeamsEntity"/>
+        <mapping resource="DivisionsEntity.hbm.xml"/>
+        <mapping class="io.github.hylinn.hibernate.statistics.DivisionsEntity"/>
+        <mapping resource="GoalieStatsEntity.hbm.xml"/>
+        <mapping class="io.github.hylinn.hibernate.statistics.GoalieStatsEntity"/>
+        <mapping resource="LeagueDivisionsEntity.hbm.xml"/>
+        <mapping class="io.github.hylinn.hibernate.statistics.LeagueDivisionsEntity"/>
+        <mapping resource="LeaguesEntity.hbm.xml"/>
+        <mapping class="io.github.hylinn.hibernate.statistics.LeaguesEntity"/>
+        <mapping resource="PlaySeasonsEntity.hbm.xml"/>
+        <mapping class="io.github.hylinn.hibernate.statistics.PlaySeasonsEntity"/>
+        <mapping resource="PlayersEntity.hbm.xml"/>
+        <mapping class="io.github.hylinn.hibernate.statistics.PlayersEntity"/>
+        <mapping resource="SeasonLeaguesEntity.hbm.xml"/>
+        <mapping class="io.github.hylinn.hibernate.statistics.SeasonLeaguesEntity"/>
+        <mapping resource="SeasonsEntity.hbm.xml"/>
+        <mapping class="io.github.hylinn.hibernate.statistics.SeasonsEntity"/>
+        <mapping resource="SkaterStatsEntity.hbm.xml"/>
+        <mapping class="io.github.hylinn.hibernate.statistics.SkaterStatsEntity"/>
+        <mapping resource="TeamPlayersEntity.hbm.xml"/>
+        <mapping class="io.github.hylinn.hibernate.statistics.TeamPlayersEntity"/>
+        <mapping resource="TeamStatsEntity.hbm.xml"/>
+        <mapping class="io.github.hylinn.hibernate.statistics.TeamStatsEntity"/>
+        <mapping resource="TeamsEntity.hbm.xml"/>
+        <mapping class="io.github.hylinn.hibernate.statistics.TeamsEntity"/>
+        <!-- DB schema will be updated if needed -->
+        <!-- <property name="hbm2ddl.auto">update</property> -->
+    </session-factory>
+</hibernate-configuration>

@@ -2,10 +2,10 @@
 <!DOCTYPE hibernate-mapping PUBLIC
     "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<hibernate-mapping>
+<hibernate-mapping package="io.github.hylinn.hibernate.statistics">
 
-    <class name="io.github.hylinn.hibernate.statistics.SeasonsEntity" table="seasons" schema="" catalog="statistics">
-        <composite-id mapped="true" class="io.github.hylinn.hibernate.statistics.SeasonsEntityPK">
+    <class name="SeasonsEntity" table="seasons" schema="" catalog="statistics">
+        <composite-id mapped="true" class="SeasonsEntityPK">
             <key-property name="year" column="year"/>
             <key-property name="playSeason" column="play_season"/>
         </composite-id>

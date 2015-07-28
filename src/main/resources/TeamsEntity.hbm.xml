@@ -2,9 +2,9 @@
 <!DOCTYPE hibernate-mapping PUBLIC
     "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<hibernate-mapping>
+<hibernate-mapping package="io.github.hylinn.hibernate.statistics">
 
-    <class name="io.github.hylinn.hibernate.statistics.LeaguesEntity" table="leagues" schema="" catalog="statistics">
+    <class name="TeamsEntity" table="teams" schema="" catalog="statistics">
         <id name="id" column="id"/>
         <property name="name" column="name"/>
     </class>

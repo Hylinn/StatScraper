@@ -2,11 +2,10 @@
 <!DOCTYPE hibernate-mapping PUBLIC
     "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<hibernate-mapping>
+<hibernate-mapping package="io.github.hylinn.hibernate.statistics">
 
-    <class name="io.github.hylinn.hibernate.statistics.DivisionsEntity" table="divisions" schema=""
+    <class name="PlaySeasonsEntity" table="play_seasons" schema=""
            catalog="statistics">
-        <id name="id" column="id"/>
-        <property name="name" column="name"/>
+        <id name="name" column="name"/>
     </class>
 </hibernate-mapping>
