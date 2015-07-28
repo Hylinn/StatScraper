@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="io.github.hylinn.hibernate.statistics.GoalieStatsEntity" table="goalie_stats" schema=""
+           catalog="statistics">
+        <id name="teamPlayer" column="team_player"/>
+        <property name="gamesPlayed" column="games_played"/>
+        <property name="shots" column="shots"/>
+        <property name="goalsAgainst" column="goals_against"/>
+        <property name="goals" column="goals"/>
+        <property name="assists" column="assists"/>
+        <property name="penaltyMinutes" column="penalty_minutes"/>
+    </class>
+</hibernate-mapping>
