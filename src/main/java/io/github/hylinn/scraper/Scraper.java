@@ -1,29 +1,36 @@
 package io.github.hylinn.scraper;
 
+import io.github.hylinn.hibernate.statistics.League;
+import io.github.hylinn.hibernate.statistics.TimeOfYear;
+import io.github.hylinn.hibernate.statistics.Season;
 import io.github.hylinn.scraper.URL.ArchiveURL;
+import io.github.hylinn.scraper.URL.StatsURL;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class Scraper {
 
-    public void createSeasonLeagues(int league) {
+    private static final int[] LEAGUE_IDS = {27};
+
+    public void createSeasons(League league) {
         try {
-            Document document = Jsoup.connect("" + new ArchiveURL(league)).get();
+            Document document = Jsoup.connect("" + new ArchiveURL(league.getId())).get();
             Elements anchors = document.select("a");
 
             for (Element element : anchors) {
-                Map<String, List<String>> parameters = getQueryParameters(element.attr("href"));
-                //System.out.println(parameters.get("season").get(0));
+                QueryParameters params = new QueryParameters(element.attr("href"));
+                String[] text = element.text().split(" ");
+
+                int seasonId = Integer.parseInt(params.get("season").get(0));
+                int year = Integer.parseInt(text[3]);
+
+                TimeOfYear playSeason = new TimeOfYear(text[2]);
+                Season season = new Season(seasonId, year, playSeason);
+                //league.getSeasons().add(season);
             }
         }
         catch (IOException e) {
@@ -31,39 +38,30 @@ public class Scraper {
         }
     }
 
-    private static Map<String, List<String>> getQueryParameters(String url) {
-        try {
-            Map<String, List<String>> params = new HashMap<String, List<String>>();
-            String[] urlParts = url.split("\\?");
-            if (urlParts.length > 1) {
-                String query = urlParts[1];
-                for (String param : query.split("&")) {
-                    String[] pair = param.split("=");
-                    String key = URLDecoder.decode(pair[0], "UTF-8");
-                    String value = "";
-                    if (pair.length > 1) {
-                        value = URLDecoder.decode(pair[1], "UTF-8");
-                    }
+    public void createLeagues() {
+        for (int id : LEAGUE_IDS) {
+            try {
+                Document document = Jsoup.connect("" + new StatsURL(id)).get();
+                Element name = document.select("tr").first();
 
-                    List<String> values = params.get(key);
-                    if (values == null) {
-                        values = new ArrayList<String>();
-                        params.put(key, values);
-                    }
-                    values.add(value);
-                }
+                League league = new League(id, name.text());
             }
+            catch (IOException e) {
 
-            return params;
-        } catch (UnsupportedEncodingException ex) {
-            throw new AssertionError(ex);
+            }
         }
+    }
+
+    public void createDivisions() {
+
     }
 
     public static void main(String[] args) {
         Scraper scraper = new Scraper();
 
-        scraper.createSeasonLeagues(27);
+        scraper.createLeagues();
 
+        League league = new League(27, "SIAHL@OK");
+        scraper.createSeasons(league);
     }
 }

@@ -9,9 +9,6 @@ import org.hibernate.service.ServiceRegistryBuilder;
 
 import java.util.Map;
 
-/**
- * Created by Hylinn on 7/27/2015.
- */
 public class Main {
     private static final SessionFactory ourSessionFactory;
     private static final ServiceRegistry serviceRegistry;
@@ -48,6 +45,8 @@ public class Main {
             }
         } finally {
             session.close();
+            System.in.read();
+            ourSessionFactory.close();
         }
     }
 }
