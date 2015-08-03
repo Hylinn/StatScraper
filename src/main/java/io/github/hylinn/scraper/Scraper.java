@@ -1,8 +1,8 @@
 package io.github.hylinn.scraper;
 
-import io.github.hylinn.hibernate.statistics.League;
-import io.github.hylinn.hibernate.statistics.TimeOfYear;
-import io.github.hylinn.hibernate.statistics.Season;
+import io.github.hylinn.statistics.hibernate.entity.League;
+import io.github.hylinn.statistics.hibernate.entity.TimeOfYear;
+import io.github.hylinn.statistics.hibernate.entity.Season;
 import io.github.hylinn.scraper.URL.ArchiveURL;
 import io.github.hylinn.scraper.URL.StatsURL;
 import org.jsoup.Jsoup;
