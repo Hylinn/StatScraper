@@ -3,22 +3,17 @@ package io.github.hylinn.statistics.hibernate.dao;
 import io.github.hylinn.statistics.hibernate.entity.Player;
 import org.hibernate.SessionFactory;
 
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 
 @Repository
 public class PlayerDAO extends HibernateDAO<Player, Integer> {
 
-    private static final String TABLE_NAME = "player";
-
     @Autowired
     private SessionFactory sessionFactory;
-
-    @Override
-    protected String getTableName() {
-        return TABLE_NAME;
-    }
 
     @Override
     protected SessionFactory getSessionFactory() {
@@ -26,7 +21,17 @@ public class PlayerDAO extends HibernateDAO<Player, Integer> {
     }
 
     @Override
-    public Player findById(Integer id) {
-        return (Player) getSessionFactory().getCurrentSession().load(Player.class, id);
+    protected Class getEntityClass() { return Player.class; }
+
+    public Player findByUnique(String name) {
+        List<Player> players = getSessionFactory().getCurrentSession().createCriteria(getEntityClass())
+            .add(
+                Restrictions.eq("name", name))
+            .list();
+
+        if (players.size() == 0)
+            return null;
+        else
+            return players.get(0);
     }
 }
