@@ -8,15 +8,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class DivisionDAO extends HibernateDAO<Division, Integer> {
 
-    private static final String TABLE_NAME = "division";
-
     @Autowired
     private SessionFactory sessionFactory;
-
-    @Override
-    protected String getTableName() {
-        return TABLE_NAME;
-    }
 
     @Override
     protected SessionFactory getSessionFactory() {
@@ -24,7 +17,5 @@ public class DivisionDAO extends HibernateDAO<Division, Integer> {
     }
 
     @Override
-    public Division findById(Integer id) {
-        return (Division) getSessionFactory().getCurrentSession().load(Division.class, id);
-    }
+    protected Class getEntityClass() { return Division.class; }
 }

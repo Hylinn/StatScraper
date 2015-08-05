@@ -20,6 +20,11 @@ public class TeamStatistics implements Serializable {
     private Integer gameMisconducts;
     private DivisionTeam divisionTeam;
 
+    protected TeamStatistics() {}
+    public TeamStatistics(DivisionTeam divisionTeam) {
+        this.divisionTeam = divisionTeam;
+    }
+
     @Id
     @GenericGenerator(name = "generator", strategy = "foreign", parameters = @Parameter(name = "property", value = "divisionTeam"))
     @GeneratedValue(generator = "generator")

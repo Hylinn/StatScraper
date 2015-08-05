@@ -13,12 +13,14 @@ import java.io.Serializable;
 public class SkaterStatistics implements Serializable {
 
     private int id;
+    private Integer number;
     private Integer gamesPlayed;
     private Integer goals;
     private Integer assists;
     private Integer powerplayGoals;
     private Integer powerplayAssists;
     private Integer shorthandedGoals;
+    private Integer shorthandedAssists;
     private Integer gameWinningGoals;
     private Integer gameWinningAssists;
     private Integer penaltyShotGoals;
@@ -26,6 +28,11 @@ public class SkaterStatistics implements Serializable {
     private Integer shotsOnGoal;
     private Integer penaltyMinutes;
     private DivisionTeamPlayer divisionTeamPlayer;
+
+    protected SkaterStatistics() {}
+    public SkaterStatistics(DivisionTeamPlayer divisionTeamPlayer) {
+        this.divisionTeamPlayer = divisionTeamPlayer;
+    }
 
     @Id
     @GenericGenerator(name = "generator", strategy = "foreign", parameters = @Parameter(name = "property", value = "divisionTeamPlayer"))
@@ -37,6 +44,10 @@ public class SkaterStatistics implements Serializable {
     public void setId(int id) {
         this.id = id;
     }
+
+    @Column(name = "number")
+    public Integer getNumber() { return number; }
+    public void setNumber(Integer number) { this.number = number; }
 
     @Column(name = "games_played")
     public Integer getGamesPlayed() {
@@ -84,6 +95,14 @@ public class SkaterStatistics implements Serializable {
     }
     public void setShorthandedGoals(Integer shorthandedGoals) {
         this.shorthandedGoals = shorthandedGoals;
+    }
+
+    @Column(name = "shorthanded_assists")
+    public Integer getShorthandedAssists() {
+        return shorthandedAssists;
+    }
+    public void setShorthandedAssists(Integer shorthandedAssists) {
+        this.shorthandedAssists = shorthandedAssists;
     }
 
     @Column(name = "game_winning_goals")

@@ -13,6 +13,7 @@ import java.io.Serializable;
 public class GoalieStatistics implements Serializable{
 
     private int id;
+    private Integer number;
     private Integer gamesPlayed;
     private Integer shots;
     private Integer goalsAgainst;
@@ -20,6 +21,11 @@ public class GoalieStatistics implements Serializable{
     private Integer assists;
     private Integer penaltyMinutes;
     private DivisionTeamPlayer divisionTeamPlayer;
+
+    protected GoalieStatistics() {}
+    public GoalieStatistics(DivisionTeamPlayer divisionTeamPlayer) {
+        this.divisionTeamPlayer = divisionTeamPlayer;
+    }
 
     @Id
     @GenericGenerator(name = "generator", strategy = "foreign", parameters = @Parameter(name = "property", value = "divisionTeamPlayer"))
@@ -31,6 +37,10 @@ public class GoalieStatistics implements Serializable{
     public void setId(int id) {
         this.id = id;
     }
+
+    @Column(name = "number")
+    public Integer getNumber() { return number; }
+    public void setNumber(Integer number) { this.number = number; }
 
     @Column(name = "games_played")
     public Integer getGamesPlayed() {

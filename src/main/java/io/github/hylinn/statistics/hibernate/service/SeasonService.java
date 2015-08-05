@@ -4,8 +4,9 @@ import io.github.hylinn.statistics.hibernate.DAO;
 import io.github.hylinn.statistics.hibernate.dao.SeasonDAO;
 import io.github.hylinn.statistics.hibernate.entity.Season;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-@org.springframework.stereotype.Service
+@Service
 public class SeasonService extends HibernateService<Season, Integer> {
 
     @Autowired

@@ -5,13 +5,11 @@ import org.hibernate.SessionFactory;
 
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.List;
 
 public abstract class HibernateDAO<T, Id extends Serializable> implements DAO<T, Id> {
 
     protected abstract SessionFactory getSessionFactory();
-    protected abstract String getTableName();
-    public abstract T findById(Id id);
+    protected abstract Class getEntityClass();
 
     public void save(T entity) {
         getSessionFactory().getCurrentSession().save(entity);
@@ -26,8 +24,11 @@ public abstract class HibernateDAO<T, Id extends Serializable> implements DAO<T,
     }
 
     public Collection<T> findAll() {
-        Collection<T> entities = (Collection<T>) getSessionFactory().getCurrentSession().createQuery("from " + getTableName()).list();
-        return entities;
+        return getSessionFactory().getCurrentSession().createCriteria(getEntityClass()).list();
+    }
+
+    public T findById(Id id) {
+        return (T) getSessionFactory().getCurrentSession().get(getEntityClass(), id);
     }
 
     public void deleteAll() {

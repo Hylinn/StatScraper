@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "player")
+@Table(name = "player", uniqueConstraints = @UniqueConstraint(columnNames = {"player_name"}))
 public class Player implements Serializable {
 
     private int id;

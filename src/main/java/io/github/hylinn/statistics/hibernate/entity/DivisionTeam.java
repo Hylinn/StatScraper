@@ -15,6 +15,12 @@ public class DivisionTeam implements Serializable {
     private Set<DivisionTeamPlayer> divisionTeamPlayers = new HashSet<DivisionTeamPlayer>(0);
     private TeamStatistics statistics;
 
+    protected DivisionTeam() {}
+    public DivisionTeam(LeagueSeasonDivision leagueSeasonDivision, Team team) {
+        this.leagueSeasonDivision = leagueSeasonDivision;
+        this.team = team;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "division_team_id")

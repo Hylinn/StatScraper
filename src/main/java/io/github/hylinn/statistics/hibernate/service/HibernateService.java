@@ -22,6 +22,7 @@ public abstract class HibernateService<T, Id extends Serializable> implements Se
         getDAO().update(entity);
     }
 
+    @Transactional
     public T findById(Id id) {
         return getDAO().findById(id);
     }
@@ -31,6 +32,7 @@ public abstract class HibernateService<T, Id extends Serializable> implements Se
         getDAO().delete(entity);
     }
 
+    @Transactional
     public Collection<T> findAll() {
         return getDAO().findAll();
     }

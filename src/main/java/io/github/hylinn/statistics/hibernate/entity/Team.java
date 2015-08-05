@@ -14,6 +14,10 @@ public class Team implements Serializable {
     private Set<DivisionTeam> divisionTeams = new HashSet<DivisionTeam>(0);
 
     protected Team() {}
+    public Team(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
     @Id
     @Column(name = "team_id")

@@ -1,22 +1,18 @@
 package io.github.hylinn.statistics.hibernate.dao;
 
-import io.github.hylinn.statistics.hibernate.entity.DivisionTeamPlayer;
+import io.github.hylinn.statistics.hibernate.entity.*;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public class DivisionTeamPlayerDAO extends HibernateDAO<DivisionTeamPlayer, Integer> {
 
-    private static final String TABLE_NAME = "division_team_player";
-
     @Autowired
     private SessionFactory sessionFactory;
-
-    @Override
-    protected String getTableName() {
-        return TABLE_NAME;
-    }
 
     @Override
     protected SessionFactory getSessionFactory() {
@@ -24,7 +20,19 @@ public class DivisionTeamPlayerDAO extends HibernateDAO<DivisionTeamPlayer, Inte
     }
 
     @Override
-    public DivisionTeamPlayer findById(Integer id) {
-        return (DivisionTeamPlayer) getSessionFactory().getCurrentSession().load(DivisionTeamPlayer.class, id);
+    protected Class getEntityClass() { return DivisionTeamPlayer.class; }
+
+    public DivisionTeamPlayer findByUnique(DivisionTeam divisionTeam, Player player) {
+        List<DivisionTeamPlayer> divisionTeamPlayers = getSessionFactory().getCurrentSession().createCriteria(getEntityClass())
+            .add(
+                Restrictions.and(
+                    Restrictions.eq("divisionTeam", divisionTeam),
+                    Restrictions.eq("player", player)))
+            .list();
+
+        if (divisionTeamPlayers.size() == 0)
+            return null;
+        else
+            return divisionTeamPlayers.get(0);
     }
 }

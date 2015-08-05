@@ -4,8 +4,10 @@ import io.github.hylinn.statistics.hibernate.DAO;
 import io.github.hylinn.statistics.hibernate.dao.PlayerDAO;
 import io.github.hylinn.statistics.hibernate.entity.Player;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-@org.springframework.stereotype.Service
+@Service
 public class PlayerService extends HibernateService<Player, Integer> {
 
     @Autowired
@@ -15,4 +17,7 @@ public class PlayerService extends HibernateService<Player, Integer> {
     protected DAO<Player, Integer> getDAO() {
         return dao;
     }
+
+    @Transactional
+    public Player findByUnique(String name) { return dao.findByUnique(name); }
 }

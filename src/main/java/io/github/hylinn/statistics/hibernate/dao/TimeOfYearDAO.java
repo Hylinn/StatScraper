@@ -8,15 +8,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class TimeOfYearDAO extends HibernateDAO<TimeOfYear, String> {
 
-    private static final String TABLE_NAME = "time_of_year";
-
     @Autowired
     private SessionFactory sessionFactory;
-
-    @Override
-    protected String getTableName() {
-        return TABLE_NAME;
-    }
 
     @Override
     protected SessionFactory getSessionFactory() {
@@ -24,7 +17,5 @@ public class TimeOfYearDAO extends HibernateDAO<TimeOfYear, String> {
     }
 
     @Override
-    public TimeOfYear findById(String id) {
-        return (TimeOfYear) getSessionFactory().getCurrentSession().load(TimeOfYear.class, id);
-    }
+    protected Class getEntityClass() { return TimeOfYear.class; }
 }

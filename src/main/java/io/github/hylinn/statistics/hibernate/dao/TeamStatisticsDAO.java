@@ -8,15 +8,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class TeamStatisticsDAO extends HibernateDAO<TeamStatistics, Integer> {
 
-    private static final String TABLE_NAME = "team_statistics";
-
     @Autowired
     private SessionFactory sessionFactory;
-
-    @Override
-    protected String getTableName() {
-        return TABLE_NAME;
-    }
 
     @Override
     protected SessionFactory getSessionFactory() {
@@ -24,7 +17,5 @@ public class TeamStatisticsDAO extends HibernateDAO<TeamStatistics, Integer> {
     }
 
     @Override
-    public TeamStatistics findById(Integer id) {
-        return (TeamStatistics) getSessionFactory().getCurrentSession().load(TeamStatistics.class, id);
-    }
+    protected Class getEntityClass() { return TeamStatistics.class; }
 }

@@ -4,12 +4,6 @@
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
-        <property name="connection.url">jdbc:mysql://localhost:3306/statistics_test</property>
-        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="connection.username">root</property>
-        <property name="connection.password">4Bcd3Fgh1Jkl</property>
-        <property name="hbm2ddl.auto">create</property>
-
         <mapping class="io.github.hylinn.statistics.hibernate.entity.DivisionTeam"/>
         <mapping class="io.github.hylinn.statistics.hibernate.entity.Division"/>
         <mapping class="io.github.hylinn.statistics.hibernate.entity.GoalieStatistics"/>

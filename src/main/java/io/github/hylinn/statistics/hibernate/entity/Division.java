@@ -13,6 +13,12 @@ public class Division implements Serializable {
     private String name;
     private Set<LeagueSeasonDivision> leagueSeasonDivisions = new HashSet<LeagueSeasonDivision>(0);
 
+    protected Division() {}
+    public Division(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     @Id
     @Column(name = "division_id")
     public int getId() {

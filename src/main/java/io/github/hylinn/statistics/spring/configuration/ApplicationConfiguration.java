@@ -1,6 +1,7 @@
 package io.github.hylinn.statistics.spring.configuration;
 
 import io.github.hylinn.statistics.hibernate.dao.HibernateDAO;
+import io.github.hylinn.statistics.hibernate.entity.League;
 import io.github.hylinn.statistics.hibernate.service.HibernateService;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +49,7 @@ public class ApplicationConfiguration {
         properties.put("hibernate.dialect", environment.getRequiredProperty("hibernate.dialect"));
         properties.put("hibernate.show_sql", environment.getRequiredProperty("hibernate.show_sql"));
         properties.put("hibernate.format_sql", environment.getRequiredProperty("hibernate.format_sql"));
+        properties.put("hibernate.hbm2ddl.auto", environment.getRequiredProperty("hibernate.hbm2ddl.auto"));
         return properties;
     }
 

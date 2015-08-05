@@ -13,6 +13,12 @@ public class DivisionTeamPlayer implements Serializable {
     private GoalieStatistics goalieStats;
     private SkaterStatistics skaterStats;
 
+    protected DivisionTeamPlayer() {}
+    public DivisionTeamPlayer(DivisionTeam divisionTeam, Player player) {
+        this.divisionTeam = divisionTeam;
+        this.player = player;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "division_team_player_id")
