@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collection;
+
 @Service
 public class DivisionTeamPlayerService extends HibernateService<DivisionTeamPlayer, Integer> {
 
@@ -22,4 +24,9 @@ public class DivisionTeamPlayerService extends HibernateService<DivisionTeamPlay
 
     @Transactional
     public DivisionTeamPlayer findByUnique(DivisionTeam divisionTeam, Player player) { return dao.findByUnique(divisionTeam, player); }
+
+    @Transactional
+    public Collection<DivisionTeamPlayer> findByPlayer(Player player) {
+        return dao.findByPlayer(player);
+    }
 }

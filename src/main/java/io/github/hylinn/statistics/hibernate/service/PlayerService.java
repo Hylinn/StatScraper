@@ -3,6 +3,7 @@ package io.github.hylinn.statistics.hibernate.service;
 import io.github.hylinn.statistics.hibernate.DAO;
 import io.github.hylinn.statistics.hibernate.dao.PlayerDAO;
 import io.github.hylinn.statistics.hibernate.entity.Player;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

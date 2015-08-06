@@ -18,4 +18,7 @@ public class TeamStatisticsDAO extends HibernateDAO<TeamStatistics, Integer> {
 
     @Override
     protected Class getEntityClass() { return TeamStatistics.class; }
+
+    @Override
+    protected void initialize(TeamStatistics teamStatistics) {}
 }

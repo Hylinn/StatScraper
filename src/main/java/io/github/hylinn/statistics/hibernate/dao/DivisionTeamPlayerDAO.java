@@ -1,11 +1,14 @@
 package io.github.hylinn.statistics.hibernate.dao;
 
-import io.github.hylinn.statistics.hibernate.entity.*;
+import io.github.hylinn.statistics.hibernate.entity.DivisionTeam;
+import io.github.hylinn.statistics.hibernate.entity.DivisionTeamPlayer;
+import io.github.hylinn.statistics.hibernate.entity.Player;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.Collection;
 import java.util.List;
 
 @Repository
@@ -22,6 +25,9 @@ public class DivisionTeamPlayerDAO extends HibernateDAO<DivisionTeamPlayer, Inte
     @Override
     protected Class getEntityClass() { return DivisionTeamPlayer.class; }
 
+    @Override
+    protected void initialize(DivisionTeamPlayer divisionTeamPlayer) {}
+
     public DivisionTeamPlayer findByUnique(DivisionTeam divisionTeam, Player player) {
         List<DivisionTeamPlayer> divisionTeamPlayers = getSessionFactory().getCurrentSession().createCriteria(getEntityClass())
             .add(
@@ -32,7 +38,22 @@ public class DivisionTeamPlayerDAO extends HibernateDAO<DivisionTeamPlayer, Inte
 
         if (divisionTeamPlayers.size() == 0)
             return null;
-        else
-            return divisionTeamPlayers.get(0);
+        else {
+            DivisionTeamPlayer divisionTeamPlayer = divisionTeamPlayers.get(0);
+            initialize(divisionTeamPlayer);
+            return divisionTeamPlayer;
+        }
+    }
+
+    public Collection<DivisionTeamPlayer> findByPlayer(Player player) {
+        List<DivisionTeamPlayer> divisionTeamPlayers = getSessionFactory().getCurrentSession().createCriteria(getEntityClass())
+            .add(
+                Restrictions.eq("player", player))
+            .list();
+
+        for (DivisionTeamPlayer divisionTeamPlayer : divisionTeamPlayers)
+            initialize(divisionTeamPlayer);
+
+        return divisionTeamPlayers;
     }
 }

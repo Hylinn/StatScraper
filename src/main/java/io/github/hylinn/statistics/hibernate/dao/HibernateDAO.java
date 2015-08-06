@@ -10,6 +10,7 @@ public abstract class HibernateDAO<T, Id extends Serializable> implements DAO<T,
 
     protected abstract SessionFactory getSessionFactory();
     protected abstract Class getEntityClass();
+    protected abstract void initialize(T t);
 
     public void save(T entity) {
         getSessionFactory().getCurrentSession().save(entity);
@@ -28,7 +29,9 @@ public abstract class HibernateDAO<T, Id extends Serializable> implements DAO<T,
     }
 
     public T findById(Id id) {
-        return (T) getSessionFactory().getCurrentSession().get(getEntityClass(), id);
+        T t = (T) getSessionFactory().getCurrentSession().get(getEntityClass(), id);
+        initialize(t);
+        return t;
     }
 
     public void deleteAll() {

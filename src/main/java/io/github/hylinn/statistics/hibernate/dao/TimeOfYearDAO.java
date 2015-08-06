@@ -18,4 +18,7 @@ public class TimeOfYearDAO extends HibernateDAO<TimeOfYear, String> {
 
     @Override
     protected Class getEntityClass() { return TimeOfYear.class; }
+
+    @Override
+    protected void initialize(TimeOfYear timeOfYear) {}
 }

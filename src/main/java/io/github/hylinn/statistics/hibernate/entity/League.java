@@ -1,5 +1,7 @@
 package io.github.hylinn.statistics.hibernate.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -7,11 +9,12 @@ import java.util.Set;
 
 @Entity
 @Table(name = "league")
+@JsonIgnoreProperties(value = {"leagueSeasons"})
 public class League implements Serializable {
 
     private int id;
     private String name;
-    private Set<LeagueSeason> leagueSeasons = new HashSet<LeagueSeason>(0);
+    private Set<LeagueSeason> leagueSeasons = new HashSet<>(0);
 
     protected League() {}
     public League(int id, String name) {
@@ -58,7 +61,6 @@ public class League implements Serializable {
     public int hashCode() {
         int result = id;
         result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (leagueSeasons != null ? leagueSeasons.hashCode() : 0);
         return result;
     }
 

@@ -234,8 +234,8 @@ public class Scraper {
                                 skaterStats = new SkaterStatistics(divisionTeamPlayer);
                                 skaterStatisticsService.save(skaterStats);
                             }
-                        } else if (skaterHeaders[j].equals("#")) {
-                            //TODO: Handle numbers
+                        } else if (skaterHeaders[j].equals("#") && canParseInteger(text)) {
+                            skaterStats.setNumber(Integer.parseInt(text));
                         } else if (skaterHeaders[j].equals("gp"))
                             skaterStats.setGamesPlayed(Integer.parseInt(text));
                         else if (skaterHeaders[j].equals("goals"))
@@ -298,8 +298,8 @@ public class Scraper {
                                 goalieStats = new GoalieStatistics(divisionTeamPlayer);
                                 goalieStatisticsService.save(goalieStats);
                             }
-                        } else if (goalieHeaders[j].equals("#")) {
-                            //TODO: Handle numbers
+                        } else if (goalieHeaders[j].equals("#") && canParseInteger(text)) {
+                            goalieStats.setNumber(Integer.parseInt(text));
                         } else if (goalieHeaders[j].equals("gp"))
                             goalieStats.setGamesPlayed(Integer.parseInt(text));
                         else if (goalieHeaders[j].equals("shots"))
@@ -319,6 +319,16 @@ public class Scraper {
         }
         catch (IOException e) {
 
+        }
+    }
+
+    private boolean canParseInteger(String string) {
+        try {
+            Integer.parseInt(string);
+            return true;
+        }
+        catch (Exception e) {
+            return false;
         }
     }
 

@@ -3,6 +3,7 @@ package io.github.hylinn.statistics.spring.configuration;
 import io.github.hylinn.statistics.hibernate.dao.HibernateDAO;
 import io.github.hylinn.statistics.hibernate.entity.League;
 import io.github.hylinn.statistics.hibernate.service.HibernateService;
+import io.github.hylinn.statistics.spring.controller.PlayerController;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.*;
@@ -11,6 +12,7 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import javax.sql.DataSource;
 import java.util.Properties;

@@ -1,6 +1,7 @@
 package io.github.hylinn.statistics.hibernate.dao;
 
 import io.github.hylinn.statistics.hibernate.entity.Player;
+import org.hibernate.Hibernate;
 import org.hibernate.SessionFactory;
 
 import org.hibernate.criterion.Restrictions;
@@ -23,6 +24,11 @@ public class PlayerDAO extends HibernateDAO<Player, Integer> {
     @Override
     protected Class getEntityClass() { return Player.class; }
 
+    @Override
+    protected void initialize(Player player) {
+        Hibernate.initialize(player.getDivisionTeamPlayers());
+    }
+
     public Player findByUnique(String name) {
         List<Player> players = getSessionFactory().getCurrentSession().createCriteria(getEntityClass())
             .add(
@@ -31,7 +37,10 @@ public class PlayerDAO extends HibernateDAO<Player, Integer> {
 
         if (players.size() == 0)
             return null;
-        else
-            return players.get(0);
+        else {
+            Player player = players.get(0);
+            initialize(player);
+            return player;
+        }
     }
 }

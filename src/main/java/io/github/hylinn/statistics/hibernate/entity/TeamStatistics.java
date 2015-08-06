@@ -1,5 +1,6 @@
 package io.github.hylinn.statistics.hibernate.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.*;
 import org.hibernate.annotations.Parameter;
 
@@ -10,6 +11,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "team_statistics")
+@JsonIgnoreProperties(value = {"divisionTeam"})
 public class TeamStatistics implements Serializable {
 
     private int id;

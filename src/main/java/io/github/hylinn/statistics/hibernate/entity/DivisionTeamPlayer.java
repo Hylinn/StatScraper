@@ -1,5 +1,7 @@
 package io.github.hylinn.statistics.hibernate.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -82,8 +84,6 @@ public class DivisionTeamPlayer implements Serializable {
         int result = id;
         result = 31 * result + (divisionTeam != null ? divisionTeam.hashCode() : 0);
         result = 31 * result + (player != null ? player.hashCode() : 0);
-        result = 31 * result + (goalieStats != null ? goalieStats.hashCode() : 0);
-        result = 31 * result + (skaterStats != null ? skaterStats.hashCode() : 0);
         return result;
     }
 }

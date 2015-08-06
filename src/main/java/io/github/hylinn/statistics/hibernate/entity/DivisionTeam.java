@@ -1,5 +1,7 @@
 package io.github.hylinn.statistics.hibernate.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -7,12 +9,13 @@ import java.util.Set;
 
 @Entity
 @Table(name = "division_team", uniqueConstraints = @UniqueConstraint(columnNames = {"league_season_division_id", "team_id"}))
+@JsonIgnoreProperties(value = {"divisionTeamPlayers", "statistics"})
 public class DivisionTeam implements Serializable {
 
     private int id;
     private LeagueSeasonDivision leagueSeasonDivision;
     private Team team;
-    private Set<DivisionTeamPlayer> divisionTeamPlayers = new HashSet<DivisionTeamPlayer>(0);
+    private Set<DivisionTeamPlayer> divisionTeamPlayers = new HashSet<>(0);
     private TeamStatistics statistics;
 
     protected DivisionTeam() {}
@@ -82,8 +85,6 @@ public class DivisionTeam implements Serializable {
         int result = id;
         result = 31 * result + (leagueSeasonDivision != null ? leagueSeasonDivision.hashCode() : 0);
         result = 31 * result + (team != null ? team.hashCode() : 0);
-        result = 31 * result + (divisionTeamPlayers != null ? divisionTeamPlayers.hashCode() : 0);
-        result = 31 * result + (statistics != null ? statistics.hashCode() : 0);
         return result;
     }
 }

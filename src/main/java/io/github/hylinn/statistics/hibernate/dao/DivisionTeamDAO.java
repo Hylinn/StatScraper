@@ -1,6 +1,7 @@
 package io.github.hylinn.statistics.hibernate.dao;
 
 import io.github.hylinn.statistics.hibernate.entity.*;
+import org.hibernate.Hibernate;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,11 @@ public class DivisionTeamDAO extends HibernateDAO<DivisionTeam, Integer> {
     @Override
     protected Class getEntityClass() { return DivisionTeam.class; }
 
+    @Override
+    protected void initialize(DivisionTeam divisionTeam) {
+        Hibernate.initialize(divisionTeam.getDivisionTeamPlayers());
+    }
+
     public DivisionTeam findByUnique(LeagueSeasonDivision leagueSeasonDivision, Team team) {
         List<DivisionTeam> divisionTeams = getSessionFactory().getCurrentSession().createCriteria(getEntityClass())
             .add(
@@ -32,7 +38,10 @@ public class DivisionTeamDAO extends HibernateDAO<DivisionTeam, Integer> {
 
         if (divisionTeams.size() == 0)
             return null;
-        else
-            return divisionTeams.get(0);
+        else {
+            DivisionTeam divisionTeam = divisionTeams.get(0);
+            initialize(divisionTeam);
+            return divisionTeam;
+        }
     }
 }
