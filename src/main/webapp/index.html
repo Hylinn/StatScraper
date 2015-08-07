@@ -1,0 +1,18 @@
+<!doctype html>
+<html ng-app="app">
+<head>
+    <meta charset="utf-8">
+    <title>Stats</title>
+    <link rel="stylesheet" href="resources/css/ui-grid/ui-grid.css">
+    <script src="resources/js/angular/angular.js"></script>
+    <script src="resources/js/ui-grid/ui-grid.js"></script>
+    <script src="resources/js/app.js"></script>
+</head>
+<body ng-controller="StatsController">
+    <input ng-model="query">
+    <button ng-click="search(query)" class="button">Search</button>
+    <div>
+        <div id="grid" ui-grid="gridOptions" class="grid"></div>
+    </div>
+</body>
+</html>
