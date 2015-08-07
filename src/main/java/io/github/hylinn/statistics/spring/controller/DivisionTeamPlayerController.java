@@ -6,6 +6,7 @@ import io.github.hylinn.statistics.hibernate.entity.Player;
 import io.github.hylinn.statistics.hibernate.service.DivisionTeamPlayerService;
 import io.github.hylinn.statistics.hibernate.service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.Collection;
 
+@CrossOrigin
 @RestController
 public class DivisionTeamPlayerController {
 
@@ -28,7 +30,7 @@ public class DivisionTeamPlayerController {
     @RequestMapping("/player/teams")
     public Collection<DivisionTeam> playerTeams(@RequestParam(value="id", required = true) int id) {
         Player player = playerService.findById(id);
-        Collection<DivisionTeamPlayer>divisionTeamPlayers = divisionTeamPlayerService.findByPlayer(player);
+        Collection<DivisionTeamPlayer> divisionTeamPlayers = divisionTeamPlayerService.findByPlayer(player);
 
         Collection<DivisionTeam> divisionTeams = new ArrayList<>(divisionTeamPlayers.size());
 
