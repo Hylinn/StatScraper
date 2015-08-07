@@ -40,18 +40,21 @@ public class Scraper {
                     int seasonId = Integer.parseInt(params.get("season").get(0));
                     int year = Integer.parseInt(text[3]);
 
+                    System.out.println("Creating TimeOfYear " + text[2] + "...");
                     TimeOfYear timeOfYear = timeOfYearService.findById(text[2]);
                     if (timeOfYear == null) {
                         timeOfYear = new TimeOfYear(text[2]);
                         timeOfYearService.save(timeOfYear);
                     }
 
+                    System.out.println("Creating Season " + seasonId + "...");
                     Season season = seasonService.findById(seasonId);
                     if (season == null) {
                         season = new Season(seasonId, year, timeOfYear);
                         seasonService.save(season);
                     }
 
+                    System.out.println("Creating LeagueSeason " + league + ", " + season + "...");
                     LeagueSeason leagueSeason = leagueSeasonService.findByUnique(league, season);
                     if (leagueSeason == null) {
                         leagueSeason = new LeagueSeason(league, season);
@@ -69,6 +72,7 @@ public class Scraper {
 
         for (int id : LEAGUE_IDS) {
             try {
+                System.out.println("Creating League " + id + "...");
                 Document document = Jsoup.connect("" + new StatsURL(id)).get();
                 Elements rows = document.select("tr");
 
@@ -126,12 +130,14 @@ public class Scraper {
                     Element divisionElement = rows.get(i).select("a[name]").first();
                     int divisionId = Integer.parseInt(divisionElement.attr("name"));
 
+                    System.out.println("Creating Division " + divisionId + "...");
                     Division division = divisionService.findById(divisionId);
                     if (division == null) {
                         division = new Division(divisionId, divisionElement.text());
                         divisionService.save(division);
                     }
 
+                    System.out.println("Creating LeagueSeasonDivision " + leagueSeason + ", " + division + "...");
                     leagueSeasonDivision = leagueSeasonDivisionService.findByUnique(leagueSeason, division);
                     if (leagueSeasonDivision == null) {
                         leagueSeasonDivision = new LeagueSeasonDivision(leagueSeason, division);
@@ -143,18 +149,21 @@ public class Scraper {
                     QueryParameters queryParameters = new QueryParameters(teamElement.select("a").first().attr("href"));
                     int teamId = Integer.parseInt(queryParameters.get("team").get(0));
 
+                    System.out.println("Creating Team " + teamId + "...");
                     Team team = teamService.findById(teamId);
                     if (team == null) {
                         team = new Team(teamId, teamElement.text());
                         teamService.save(team);
                     }
 
+                    System.out.println("Creating DivisionTeam " + leagueSeasonDivision + ", " + team + "...");
                     DivisionTeam divisionTeam = divisionTeamService.findByUnique(leagueSeasonDivision, team);
                     if (divisionTeam == null) {
                         divisionTeam = new DivisionTeam(leagueSeasonDivision, team);
                         divisionTeamService.save(divisionTeam);
                     }
 
+                    System.out.println("Creating TeamStatistics " + divisionTeam.getId() + "...");
                     TeamStatistics teamStats = teamStatisticsService.findById(divisionTeam.getId());
                     if (teamStats == null) {
                         teamStats = new TeamStatistics(divisionTeam);
@@ -223,12 +232,14 @@ public class Scraper {
                                 playerService.save(player);
                             }
 
+                            System.out.println("Creating DivisionTeamPlayer " + divisionTeam + ", " + player + "...");
                             DivisionTeamPlayer divisionTeamPlayer = divisionTeamPlayerService.findByUnique(divisionTeam, player);
                             if (divisionTeamPlayer == null) {
                                 divisionTeamPlayer = new DivisionTeamPlayer(divisionTeam, player);
                                 divisionTeamPlayerService.save(divisionTeamPlayer);
                             }
 
+                            System.out.println("Creating SkaterStatistics " + divisionTeamPlayer.getId() + "...");
                             skaterStats = skaterStatisticsService.findById(divisionTeamPlayer.getId());
                             if (skaterStats == null) {
                                 skaterStats = new SkaterStatistics(divisionTeamPlayer);
@@ -287,12 +298,14 @@ public class Scraper {
                                 playerService.save(player);
                             }
 
+                            System.out.println("Creating DivisionTeamPlayer " + divisionTeam + ", " + player + "...");
                             DivisionTeamPlayer divisionTeamPlayer = divisionTeamPlayerService.findByUnique(divisionTeam, player);
                             if (divisionTeamPlayer == null) {
                                 divisionTeamPlayer = new DivisionTeamPlayer(divisionTeam, player);
                                 divisionTeamPlayerService.save(divisionTeamPlayer);
                             }
 
+                            System.out.println("Creating GoalieStatistics " + divisionTeamPlayer.getId() + "...");
                             goalieStats = goalieStatisticsService.findById(divisionTeamPlayer.getId());
                             if (goalieStats == null) {
                                 goalieStats = new GoalieStatistics(divisionTeamPlayer);
