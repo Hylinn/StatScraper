@@ -30,7 +30,7 @@ public abstract class HibernateDAO<T, Id extends Serializable> implements DAO<T,
 
     public T findById(Id id) {
         T t = (T) getSessionFactory().getCurrentSession().get(getEntityClass(), id);
-        initialize(t);
+        if (t != null) initialize(t);
         return t;
     }
 
