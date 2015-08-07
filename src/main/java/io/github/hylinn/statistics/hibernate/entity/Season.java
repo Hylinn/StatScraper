@@ -70,5 +70,5 @@ public class Season implements Serializable {
     }
 
     @Override
-    public String toString() { return "" + time + year + ", " + id; }
+    public String toString() { return "" + time + " " + year; }
 }

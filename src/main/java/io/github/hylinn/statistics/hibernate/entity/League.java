@@ -66,6 +66,6 @@ public class League implements Serializable {
 
     @Override
     public String toString() {
-        return getName() + " League, " + getId();
+        return getName() + " League";
     }
 }

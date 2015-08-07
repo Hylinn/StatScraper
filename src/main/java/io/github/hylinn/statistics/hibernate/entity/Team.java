@@ -66,6 +66,6 @@ public class Team implements Serializable {
 
     @Override
     public String toString() {
-        return "Team " + getName() + ", " + getId();
+        return "Team " + getName();
     }
 }

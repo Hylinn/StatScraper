@@ -62,6 +62,6 @@ public class Division implements Serializable {
 
     @Override
     public String toString() {
-        return getName() + " Division, " + getId();
+        return getName() + " Division";
     }
 }
