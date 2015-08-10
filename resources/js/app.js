@@ -13,7 +13,7 @@ app.controller('StatsController', ['$scope', '$http', function ($scope, $http) {
         ]
     };
 
-    $http.get('http://statscraper.elasticbeanstalk.com:8080/player/teams?id=10').then(
+    $http.get('http://localhost:8080/player/teams?id=10').then(
         function(response) {
             $scope.gridOptions.data = response.data;
         },
@@ -23,7 +23,7 @@ app.controller('StatsController', ['$scope', '$http', function ($scope, $http) {
     );
 
     $scope.search = function(id) {
-        $http.get('http://statscraper.elasticbeanstalk.com:8080/player/teams?id=' + id).then(
+        $http.get('http://localhost:8080/player/teams?id=' + id).then(
             function(response) {
                 $scope.gridOptions.data = response.data;
             },
