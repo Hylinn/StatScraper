@@ -12,7 +12,7 @@ import java.util.Set;
 @JsonIgnoreProperties(value = {"leagueSeasons"})
 public class Season implements Serializable {
 
-    private int id;
+    private Integer id;
     private Integer year;
     private TimeOfYear time;
     private Set<LeagueSeason> leagueSeasons = new HashSet<>(0);
@@ -26,8 +26,8 @@ public class Season implements Serializable {
 
     @Id
     @Column(name = "season_id")
-    public int getId() { return id; }
-    public void setId(int id) {
+    public Integer getId() { return id; }
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -53,17 +53,16 @@ public class Season implements Serializable {
 
         Season that = (Season) o;
 
-        if (id != that.id) return false;
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
         if (year != null ? !year.equals(that.year) : that.year != null) return false;
         if (time != null ? !time.equals(that.time) : that.time != null) return false;
-        if (leagueSeasons != null ? !leagueSeasons.equals(that.leagueSeasons) : that.leagueSeasons != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = id;
+        int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (year != null ? year.hashCode() : 0);
         result = 31 * result + (time != null ? time.hashCode() : 0);
         return result;

@@ -1,6 +1,8 @@
 package io.github.hylinn.statistics.hibernate.dao;
 
-import io.github.hylinn.statistics.hibernate.entity.*;
+import io.github.hylinn.statistics.hibernate.entity.DivisionTeam;
+import io.github.hylinn.statistics.hibernate.entity.LeagueSeasonDivision;
+import io.github.hylinn.statistics.hibernate.entity.Team;
 import org.hibernate.Hibernate;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -26,6 +28,11 @@ public class DivisionTeamDAO extends HibernateDAO<DivisionTeam, Integer> {
     @Override
     protected void initialize(DivisionTeam divisionTeam) {
         Hibernate.initialize(divisionTeam.getDivisionTeamPlayers());
+    }
+
+    @Override
+    protected DivisionTeam find(DivisionTeam entity) {
+        return findByUnique(entity.getLeagueSeasonDivision(), entity.getTeam());
     }
 
     public DivisionTeam findByUnique(LeagueSeasonDivision leagueSeasonDivision, Team team) {

@@ -3,15 +3,11 @@ package io.github.hylinn.statistics.hibernate.dao;
 import io.github.hylinn.statistics.hibernate.entity.Player;
 import org.hibernate.Hibernate;
 import org.hibernate.SessionFactory;
-
-import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
-public class PlayerDAO extends HibernateDAO<Player, Integer> {
+public class PlayerDAO extends HibernateDAO<Player, String> {
 
     @Autowired
     private SessionFactory sessionFactory;
@@ -29,18 +25,8 @@ public class PlayerDAO extends HibernateDAO<Player, Integer> {
         Hibernate.initialize(player.getDivisionTeamPlayers());
     }
 
-    public Player findByUnique(String name) {
-        List<Player> players = getSessionFactory().getCurrentSession().createCriteria(getEntityClass())
-            .add(
-                Restrictions.eq("name", name))
-            .list();
-
-        if (players.size() == 0)
-            return null;
-        else {
-            Player player = players.get(0);
-            initialize(player);
-            return player;
-        }
+    @Override
+    protected Player find(Player entity) {
+        return findById(entity.getName());
     }
 }

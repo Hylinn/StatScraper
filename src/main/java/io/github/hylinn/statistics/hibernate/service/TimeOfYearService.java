@@ -1,6 +1,6 @@
 package io.github.hylinn.statistics.hibernate.service;
 
-import io.github.hylinn.statistics.hibernate.DAO;
+import io.github.hylinn.statistics.hibernate.dao.DAO;
 import io.github.hylinn.statistics.hibernate.dao.TimeOfYearDAO;
 import io.github.hylinn.statistics.hibernate.entity.TimeOfYear;
 import org.springframework.beans.factory.annotation.Autowired;

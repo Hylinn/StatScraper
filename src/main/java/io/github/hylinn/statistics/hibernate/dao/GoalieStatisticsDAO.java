@@ -21,4 +21,9 @@ public class GoalieStatisticsDAO extends HibernateDAO<GoalieStatistics, Integer>
 
     @Override
     protected void initialize(GoalieStatistics goalieStatistics) {}
+
+    @Override
+    protected GoalieStatistics find(GoalieStatistics entity) {
+        return findById(entity.getId());
+    }
 }

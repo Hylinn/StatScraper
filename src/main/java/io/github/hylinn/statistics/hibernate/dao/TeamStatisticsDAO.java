@@ -21,4 +21,9 @@ public class TeamStatisticsDAO extends HibernateDAO<TeamStatistics, Integer> {
 
     @Override
     protected void initialize(TeamStatistics teamStatistics) {}
+
+    @Override
+    protected TeamStatistics find(TeamStatistics entity) {
+        return findById(entity.getId());
+    }
 }

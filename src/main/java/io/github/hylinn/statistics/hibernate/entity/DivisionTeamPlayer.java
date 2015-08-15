@@ -6,10 +6,11 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "division_team_player", uniqueConstraints = @UniqueConstraint(columnNames = {"division_team_id", "player_id"}))
+@Table(name = "team_player", uniqueConstraints = @UniqueConstraint(columnNames = {"division_team_id", "player_name"}))
+@JsonIgnoreProperties(value = {"goalieStats", "skaterStats"})
 public class DivisionTeamPlayer implements Serializable {
 
-    private int id;
+    private Integer id;
     private DivisionTeam divisionTeam;
     private Player player;
     private GoalieStatistics goalieStats;
@@ -23,16 +24,16 @@ public class DivisionTeamPlayer implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "division_team_player_id")
-    public int getId() {
+    @Column(name = "team_player_id")
+    public Integer getId() {
         return id;
     }
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
     @ManyToOne
-    @JoinColumn(name = "player_id", nullable = false)
+    @JoinColumn(name = "player_name", nullable = false)
     public Player getPlayer() { return player; }
     public void setPlayer(Player player) {
         this.player = player;
@@ -70,18 +71,16 @@ public class DivisionTeamPlayer implements Serializable {
 
         DivisionTeamPlayer that = (DivisionTeamPlayer) o;
 
-        if (id != that.id) return false;
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
         if (divisionTeam != null ? !divisionTeam.equals(that.divisionTeam) : that.divisionTeam != null) return false;
         if (player != null ? !player.equals(that.player) : that.player != null) return false;
-        if (goalieStats != null ? !goalieStats.equals(that.goalieStats) : that.goalieStats != null) return false;
-        if (skaterStats != null ? !skaterStats.equals(that.skaterStats) : that.skaterStats != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = id;
+        int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (divisionTeam != null ? divisionTeam.hashCode() : 0);
         result = 31 * result + (player != null ? player.hashCode() : 0);
         return result;

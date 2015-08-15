@@ -12,9 +12,9 @@ import java.util.Set;
 @JsonIgnoreProperties(value = {"divisionTeamPlayers", "statistics"})
 public class DivisionTeam implements Serializable {
 
-    private int id;
-    private LeagueSeasonDivision leagueSeasonDivision;
+    private Integer id;
     private Team team;
+    private LeagueSeasonDivision leagueSeasonDivision;
     private Set<DivisionTeamPlayer> divisionTeamPlayers = new HashSet<>(0);
     private TeamStatistics statistics;
 
@@ -27,10 +27,10 @@ public class DivisionTeam implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "division_team_id")
-    public int getId() {
+    public Integer getId() {
         return id;
     }
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -64,6 +64,7 @@ public class DivisionTeam implements Serializable {
         this.statistics = statistics;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -71,18 +72,16 @@ public class DivisionTeam implements Serializable {
 
         DivisionTeam that = (DivisionTeam) o;
 
-        if (id != that.id) return false;
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
         if (leagueSeasonDivision != null ? !leagueSeasonDivision.equals(that.leagueSeasonDivision) : that.leagueSeasonDivision != null) return false;
         if (team != null ? !team.equals(that.team) : that.team != null) return false;
-        if (divisionTeamPlayers != null ? !divisionTeamPlayers.equals(that.divisionTeamPlayers) : that.divisionTeamPlayers != null) return false;
-        if (statistics != null ? !statistics.equals(that.statistics) : that.statistics != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = id;
+        int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (leagueSeasonDivision != null ? leagueSeasonDivision.hashCode() : 0);
         result = 31 * result + (team != null ? team.hashCode() : 0);
         return result;

@@ -1,6 +1,6 @@
 package io.github.hylinn.statistics.hibernate.service;
 
-import io.github.hylinn.statistics.hibernate.DAO;
+import io.github.hylinn.statistics.hibernate.dao.DAO;
 import io.github.hylinn.statistics.hibernate.dao.SkaterStatisticsDAO;
 import io.github.hylinn.statistics.hibernate.entity.SkaterStatistics;
 import org.springframework.beans.factory.annotation.Autowired;

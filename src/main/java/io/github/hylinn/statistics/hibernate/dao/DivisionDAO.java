@@ -22,6 +22,11 @@ public class DivisionDAO extends HibernateDAO<Division, Integer> {
 
     @Override
     protected void initialize(Division division) {
-        Hibernate.initialize(division.getLeagueSeasonDivisions());
+        Hibernate.initialize(division.getLeagueSeasonTeams());
+    }
+
+    @Override
+    protected Division find(Division entity) {
+        return findById(entity.getId());
     }
 }

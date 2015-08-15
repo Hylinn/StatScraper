@@ -17,6 +17,5 @@
         <mapping class="io.github.hylinn.statistics.hibernate.entity.DivisionTeamPlayer"/>
         <mapping class="io.github.hylinn.statistics.hibernate.entity.TeamStatistics"/>
         <mapping class="io.github.hylinn.statistics.hibernate.entity.Team"/>
-
     </session-factory>
 </hibernate-configuration>

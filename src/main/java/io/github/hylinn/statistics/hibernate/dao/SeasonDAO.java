@@ -24,4 +24,9 @@ public class SeasonDAO extends HibernateDAO<Season, Integer> {
     protected void initialize(Season season) {
         Hibernate.initialize(season.getLeagueSeasons());
     }
+
+    @Override
+    protected Season find(Season entity) {
+        return findById(entity.getId());
+    }
 }

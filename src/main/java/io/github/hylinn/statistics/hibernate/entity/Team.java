@@ -12,22 +12,22 @@ import java.util.Set;
 @JsonIgnoreProperties(value = {"divisionTeams"})
 public class Team implements Serializable {
 
-    private int id;
+    private Integer id;
     private String name;
-    private Set<DivisionTeam> divisionTeams = new HashSet<DivisionTeam>(0);
+    private Set<DivisionTeam> divisionTeams = new HashSet<>(0);
 
     protected Team() {}
-    public Team(int id, String name) {
+    public Team(Integer id, String name) {
         this.id = id;
         this.name = name;
     }
 
     @Id
     @Column(name = "team_id")
-    public int getId() {
+    public Integer getId() {
         return id;
     }
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -50,16 +50,15 @@ public class Team implements Serializable {
 
         Team that = (Team) o;
 
-        if (id != that.id) return false;
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
-        if (divisionTeams != null ? !divisionTeams.equals(that.divisionTeams) : that.divisionTeams != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = id;
+        int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         return result;
     }

@@ -1,7 +1,6 @@
 package io.github.hylinn.statistics.hibernate.service;
 
-import io.github.hylinn.statistics.hibernate.DAO;
-import io.github.hylinn.statistics.hibernate.Service;
+import io.github.hylinn.statistics.hibernate.dao.DAO;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
@@ -18,9 +17,15 @@ public abstract class HibernateService<T, Id extends Serializable> implements Se
     }
 
     @Transactional
+    public T saveOrFind(T entity) { return getDAO().saveOrFind(entity); }
+
+    @Transactional
     public void update(T entity) {
         getDAO().update(entity);
     }
+
+    @Transactional
+    public T findByEntity(T entity) { return getDAO().findByEntity(entity); }
 
     @Transactional
     public T findById(Id id) {

@@ -30,6 +30,11 @@ public class LeagueSeasonDAO extends HibernateDAO<LeagueSeason, Integer> {
         Hibernate.initialize(leagueSeason.getLeagueSeasonDivisions());
     }
 
+    @Override
+    protected LeagueSeason find(LeagueSeason entity) {
+        return findByUnique(entity.getLeague(), entity.getSeason());
+    }
+
     public LeagueSeason findByUnique(League league, Season season) {
         List<LeagueSeason> leagueSeasons = getSessionFactory().getCurrentSession().createCriteria(getEntityClass())
             .add(

@@ -28,6 +28,11 @@ public class DivisionTeamPlayerDAO extends HibernateDAO<DivisionTeamPlayer, Inte
     @Override
     protected void initialize(DivisionTeamPlayer divisionTeamPlayer) {}
 
+    @Override
+    protected DivisionTeamPlayer find(DivisionTeamPlayer entity) {
+        return findByUnique(entity.getDivisionTeam(), entity.getPlayer());
+    }
+
     public DivisionTeamPlayer findByUnique(DivisionTeam divisionTeam, Player player) {
         List<DivisionTeamPlayer> divisionTeamPlayers = getSessionFactory().getCurrentSession().createCriteria(getEntityClass())
             .add(

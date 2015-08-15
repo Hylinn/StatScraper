@@ -1,6 +1,6 @@
 package io.github.hylinn.statistics.hibernate.service;
 
-import io.github.hylinn.statistics.hibernate.DAO;
+import io.github.hylinn.statistics.hibernate.dao.DAO;
 import io.github.hylinn.statistics.hibernate.dao.DivisionTeamDAO;
 import io.github.hylinn.statistics.hibernate.entity.DivisionTeam;
 import io.github.hylinn.statistics.hibernate.entity.LeagueSeasonDivision;

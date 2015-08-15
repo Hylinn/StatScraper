@@ -4,7 +4,6 @@ import io.github.hylinn.statistics.hibernate.entity.DivisionTeamPlayer;
 import io.github.hylinn.statistics.hibernate.entity.SkaterStatistics;
 import io.github.hylinn.statistics.hibernate.service.DivisionTeamPlayerService;
 import io.github.hylinn.statistics.hibernate.service.PlayerService;
-import io.github.hylinn.statistics.hibernate.service.SkaterStatisticsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;

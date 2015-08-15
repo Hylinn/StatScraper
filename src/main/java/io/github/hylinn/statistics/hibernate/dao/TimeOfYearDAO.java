@@ -21,4 +21,9 @@ public class TimeOfYearDAO extends HibernateDAO<TimeOfYear, String> {
 
     @Override
     protected void initialize(TimeOfYear timeOfYear) {}
+
+    @Override
+    protected TimeOfYear find(TimeOfYear entity) {
+        return findById(entity.getName());
+    }
 }

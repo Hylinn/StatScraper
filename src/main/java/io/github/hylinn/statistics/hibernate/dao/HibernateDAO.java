@@ -1,6 +1,6 @@
 package io.github.hylinn.statistics.hibernate.dao;
 
-import io.github.hylinn.statistics.hibernate.DAO;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import java.io.Serializable;
@@ -11,6 +11,7 @@ public abstract class HibernateDAO<T, Id extends Serializable> implements DAO<T,
     protected abstract SessionFactory getSessionFactory();
     protected abstract Class getEntityClass();
     protected abstract void initialize(T t);
+    protected abstract T find(T entity);
 
     public void save(T entity) {
         getSessionFactory().getCurrentSession().save(entity);
@@ -28,6 +29,15 @@ public abstract class HibernateDAO<T, Id extends Serializable> implements DAO<T,
         return getSessionFactory().getCurrentSession().createCriteria(getEntityClass()).list();
     }
 
+    public T findByEntity(T entity) {
+        Session session = getSessionFactory().getCurrentSession();
+        String entityName = session.getEntityName(entity);
+        Serializable id = session.getIdentifier(entity);
+        T t = (T) getSessionFactory().getCurrentSession().get(entityName, id);
+
+        return t;
+    }
+
     public T findById(Id id) {
         T t = (T) getSessionFactory().getCurrentSession().get(getEntityClass(), id);
         if (t != null) initialize(t);
@@ -39,5 +49,17 @@ public abstract class HibernateDAO<T, Id extends Serializable> implements DAO<T,
         for (T entity : entities) {
             delete(entity);
         }
+    }
+
+    public T saveOrFind(T entity) {
+        T t = find(entity);
+        if (t == null) {
+            t = entity;
+            save(t);
+        }
+        else
+            update(t);
+
+        return t;
     }
 }

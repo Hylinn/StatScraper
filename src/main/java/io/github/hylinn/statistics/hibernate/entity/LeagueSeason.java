@@ -12,7 +12,7 @@ import java.util.Set;
 @JsonIgnoreProperties(value = {"leagueSeasonDivisions"})
 public class LeagueSeason implements Serializable {
 
-    private int id;
+    private Integer id;
     private League league;
     private Season season;
     private Set<LeagueSeasonDivision> leagueSeasonDivisions = new HashSet<>(0);
@@ -26,8 +26,8 @@ public class LeagueSeason implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "league_season_id")
-    public int getId() { return id;}
-    public void setId(int id) { this.id = id;}
+    public Integer getId() { return id;}
+    public void setId(Integer id) { this.id = id;}
 
     @ManyToOne
     @JoinColumn(name = "league_id", nullable = false)
@@ -49,16 +49,15 @@ public class LeagueSeason implements Serializable {
 
         LeagueSeason that = (LeagueSeason) o;
 
-        if (id != that.id) return false;
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
         if (league != null ? !league.equals(that.league) : that.league != null) return false;
         if (season != null ? !season.equals(that.season) : that.season != null) return false;
-        if (leagueSeasonDivisions != null ? !leagueSeasonDivisions.equals(that.leagueSeasonDivisions) : that.leagueSeasonDivisions != null) return false;
 
         return true;
     }
 
     public int hashCode() {
-        int result = id;
+        int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (league != null ? league.hashCode() : 0);
         result = 31 * result + (season != null ? season.hashCode() : 0);
         return result;

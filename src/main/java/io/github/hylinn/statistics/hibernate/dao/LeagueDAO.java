@@ -24,4 +24,9 @@ public class LeagueDAO extends HibernateDAO<League, Integer> {
     protected void initialize(League league) {
         Hibernate.initialize(league.getLeagueSeasons());
     }
+
+    @Override
+    protected League find(League entity) {
+        return findById(entity.getId());
+    }
 }

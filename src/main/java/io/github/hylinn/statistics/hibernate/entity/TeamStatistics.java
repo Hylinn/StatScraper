@@ -14,7 +14,7 @@ import java.io.Serializable;
 @JsonIgnoreProperties(value = {"divisionTeam"})
 public class TeamStatistics implements Serializable {
 
-    private int id;
+    private Integer id;
     private Integer wins;
     private Integer losses;
     private Integer ties;
@@ -30,11 +30,11 @@ public class TeamStatistics implements Serializable {
     @Id
     @GenericGenerator(name = "generator", strategy = "foreign", parameters = @Parameter(name = "property", value = "divisionTeam"))
     @GeneratedValue(generator = "generator")
-    @Column(name = "division_team_id", unique = true, nullable = false)
-    public int getId() {
+    @Column(name = "league_season_team_id", unique = true, nullable = false)
+    public Integer getId() {
         return id;
     }
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -94,20 +94,19 @@ public class TeamStatistics implements Serializable {
 
         TeamStatistics that = (TeamStatistics) o;
 
-        if (id != that.id) return false;
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
         if (wins != null ? !wins.equals(that.wins) : that.wins != null) return false;
         if (losses != null ? !losses.equals(that.losses) : that.losses != null) return false;
         if (ties != null ? !ties.equals(that.ties) : that.ties != null) return false;
         if (overtimeLosses != null ? !overtimeLosses.equals(that.overtimeLosses) : that.overtimeLosses != null) return false;
         if (gameMisconducts != null ? !gameMisconducts.equals(that.gameMisconducts) : that.gameMisconducts != null) return false;
-        if (divisionTeam != null ? !divisionTeam.equals(that.divisionTeam) : that.divisionTeam != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = id;
+        int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (wins != null ? wins.hashCode() : 0);
         result = 31 * result + (losses != null ? losses.hashCode() : 0);
         result = 31 * result + (ties != null ? ties.hashCode() : 0);

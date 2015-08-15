@@ -24,4 +24,9 @@ public class TeamDAO extends HibernateDAO<Team, Integer> {
     protected void initialize(Team team) {
         Hibernate.initialize(team.getDivisionTeams());
     }
+
+    @Override
+    protected Team find(Team entity) {
+        return findById(entity.getId());
+    }
 }

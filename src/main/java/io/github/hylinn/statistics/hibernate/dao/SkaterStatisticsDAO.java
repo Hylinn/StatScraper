@@ -21,4 +21,9 @@ public class SkaterStatisticsDAO extends HibernateDAO<SkaterStatistics, Integer>
 
     @Override
     protected void initialize(SkaterStatistics skaterStatistics) {}
+
+    @Override
+    protected SkaterStatistics find(SkaterStatistics entity) {
+        return findById(entity.getId());
+    }
 }

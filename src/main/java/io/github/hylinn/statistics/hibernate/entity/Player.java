@@ -8,11 +8,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "player", uniqueConstraints = @UniqueConstraint(columnNames = {"player_name"}))
+@Table(name = "player")
 @JsonIgnoreProperties(value = {"divisionTeamPlayers"})
 public class Player implements Serializable {
 
-    private int id;
     private String name;
     private String displayName;
     private Set<DivisionTeamPlayer> divisionTeamPlayers = new HashSet<>(0);
@@ -24,15 +23,6 @@ public class Player implements Serializable {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "player_id")
-    public int getId() {
-        return id;
-    }
-    public void setId(int id) {
-        this.id = id;
-    }
-
     @Column(name = "player_name")
     public String getName() {
         return name;
@@ -61,18 +51,15 @@ public class Player implements Serializable {
 
         Player that = (Player) o;
 
-        if (id != that.id) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
         if (displayName != null ? !displayName.equals(that.displayName) : that.displayName != null) return false;
-        if (divisionTeamPlayers != null ? !divisionTeamPlayers.equals(that.divisionTeamPlayers) : that.divisionTeamPlayers != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = id;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
+        int result = name != null ? name.hashCode() : 0;
         result = 31 * result + (displayName != null ? displayName.hashCode() : 0);
         return result;
     }

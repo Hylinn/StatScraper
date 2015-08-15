@@ -12,10 +12,11 @@ import java.util.Set;
 @JsonIgnoreProperties(value = {"divisionTeams"})
 public class LeagueSeasonDivision implements Serializable {
 
-    private int id;
+    private Integer id;
     private LeagueSeason leagueSeason;
     private Division division;
     private Set<DivisionTeam> divisionTeams = new HashSet<>(0);
+
 
     protected LeagueSeasonDivision() {}
     public LeagueSeasonDivision(LeagueSeason leagueSeason, Division division) {
@@ -26,10 +27,10 @@ public class LeagueSeasonDivision implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "league_season_division_id")
-    public int getId() {
+    public Integer getId() {
         return id;
     }
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -62,7 +63,7 @@ public class LeagueSeasonDivision implements Serializable {
 
         LeagueSeasonDivision that = (LeagueSeasonDivision) o;
 
-        if (id != that.id) return false;
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
         if (leagueSeason != null ? !leagueSeason.equals(that.leagueSeason) : that.leagueSeason != null) return false;
         if (division != null ? !division.equals(that.division) : that.division != null) return false;
 
@@ -71,7 +72,7 @@ public class LeagueSeasonDivision implements Serializable {
 
     @Override
     public int hashCode() {
-        int result = id;
+        int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (leagueSeason != null ? leagueSeason.hashCode() : 0);
         result = 31 * result + (division != null ? division.hashCode() : 0);
         return result;
